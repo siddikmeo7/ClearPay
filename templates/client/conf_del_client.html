@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+{% block title %}Confirmation Delete Work{% endblock title %}
+{% block content %}
+<style>
+    .delete-button {
+        background-color: #6c757d;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .delete-button:hover {
+        background-color: #5a6268;
+    }
+    
+    .back-button  {
+        background-color: #6c757d;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #5a6268;
+    }
+</style>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+<div class="container">
+        <h1>Are You Sure to Delete Client:{{client.first_name}}?</h1>
+        <h2>LastName:{{client.last_name}}</h2>
+        <h3>Email:{{client.email}}</h3>
+        <h4>PhoneNumber:{{client.phone_number}}</h4>
+        <h6>Location:{{clienet.location}}</h6>
+        <p>Registerd At:{{client.created_at}}</p>
+</div>
+        <button class="delete-button" type="submit">Delete</button>
+        <button class="back-button" type="button" onclick="window.history.back()">Back</button>
+    </form>
+
+{% endblock content %}

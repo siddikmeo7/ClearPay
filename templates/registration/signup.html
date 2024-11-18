@@ -1,0 +1,119 @@
+{% extends "home.html" %}
+
+{% block title %}Sign up{% endblock title %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .signup-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 60px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .signup-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group p {
+        margin: 0;
+        color: #555;
+        font-size: 14px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 10px 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    .cancel-btn {
+        display: block;
+        text-align: center;
+        color: #008CBA;
+        text-decoration: none;
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    .cancel-btn:hover {
+        text-decoration: underline;
+    }
+
+    .extra-links {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .extra-links a {
+        color: #555;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .extra-links a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="signup-container">
+    <h2>Create a new account</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Sign up</button>
+    </form>
+        <h3>Already have an account?</h3>
+        <a href="{% url 'login' %}"><button class="btn btn-primary">Log in</button></a>
+        <a href="Base-Page" class="cancel-btn">Cancel</a>
+ 
+</div>
+
+{% endblock content %}

@@ -1,0 +1,168 @@
+{% extends "home.html" %}
+{% block title %}Clients{% endblock title %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h1 {
+        font-size: 32px;
+        color: #333333;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .buttons {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .buttons a {
+        text-decoration: none;
+    }
+
+    .buttons button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .buttons button:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+    }
+
+    .buttons button:active {
+        transform: translateY(1px);
+    }
+
+    .client-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .client-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .client-card a {
+        text-decoration: none;
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .client-card a:hover {
+        color: #0056b3;
+    }
+
+    .balance {
+        font-size: 18px;
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .no-clients {
+        text-align: center;
+        font-size: 20px;
+        color: #888888;
+        margin-top: 20px;
+    }
+
+    .home-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .home-link button {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .home-link button:hover {
+        background-color: #5a6268;
+        transform: translateY(-3px);
+    }
+
+    .home-link button:active {
+        transform: translateY(1px);
+    }
+
+    @media (max-width: 768px) {
+        .client-card {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .client-card a {
+            font-size: 16px;
+        }
+
+        .balance {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="buttons">
+    <a href="{% url 'Add-Client' %}"><button>Add Client</button></a>
+</div>
+
+<div class="container">
+    <h1>Clients List</h1>
+    {% for client in object_list %}
+    <div class="client-card">
+        <a href="{% url 'Client-Detail' client.id %}">
+            Client: {{ client.first_name }} {{ client.last_name }}
+        </a>
+        <p class="balance">Balance: ${{ client.balance }}</p>
+    </div>
+    {% empty %}
+    <p class="no-clients">No clients found.</p>
+    {% endfor %}
+</div>
+
+<div class="home-link">
+    <a href="{% url 'Base-Page' %}"><button>Home Page</button></a>
+</div>
+{% endblock content %}

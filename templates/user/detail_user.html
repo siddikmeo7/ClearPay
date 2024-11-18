@@ -1,0 +1,114 @@
+{% extends "home.html" %}
+
+{% block title %}Profile User{% endblock %}
+
+{% block content %}
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .user-profile {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-profile h2 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .user-profile p {
+        font-size: 18px;
+        color: #666;
+        margin: 10px 0;
+    }
+
+    .user-profile img {
+        display: block;
+        margin: 20px auto;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-profile .no-photo {
+        text-align: center;
+        font-size: 18px;
+        color: #999;
+    }
+
+    .user-profile form {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .user-profile button {
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin: 10px;
+    }
+
+    .user-profile button:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+    }
+
+    .user-profile button:active {
+        transform: translateY(1px);
+    }
+
+    .user-profile .back-btn {
+        background-color: #28a745;
+    }
+
+    .user-profile .back-btn:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="user-profile">
+    <h2>{{ user.username }}'s Profile</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+    <p><strong>Age:</strong> {{ user.age }}</p>
+
+    {% if user.profile_photo %}
+        <img src="{{ user.profile_photo.url }}" alt="{{ user.username }}'s Profile Photo" />
+    {% else %}
+        <p class="no-photo">No profile photo available.</p>
+    {% endif %}
+
+    <p><strong>Account created at:</strong> {{ user.created_at }}</p>
+    <p><strong>Last updated at:</strong> {{ user.updated_at }}</p>
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        <a href="{% url 'Base-Page' %}">
+            <button class="back-btn">Home Page</button>
+        </a>
+    {% endif %}
+</div>
+
+{% endblock %}

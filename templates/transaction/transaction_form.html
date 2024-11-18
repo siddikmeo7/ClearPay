@@ -1,0 +1,90 @@
+{% extends "home.html" %}
+{% block title %}Add Product{% endblock title %}
+
+{% block content %}
+<style>
+    .container {
+        width: 40%; 
+        margin: 20px auto;
+        padding: 15px; 
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.4em; 
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+    }
+
+    form input, form select, form textarea {
+        width: 100%;
+        padding: 8px;
+        font-size: 0.9em; 
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    form button {
+        padding: 8px 12px; 
+        font-size: 0.9em; 
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.2s;
+    }
+
+    form button[type="submit"] {
+        background-color: #28a745;
+        color: white;
+    }
+
+    form button[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    form button[type="reset"] {
+        background-color: #ffc107;
+        color: white;
+    }
+
+    form button[type="reset"]:hover {
+        background-color: #e0a800;
+    }
+
+    form button[type="button"] {
+        background-color: #007bff;
+        color: white;
+    }
+
+    form button[type="button"]:hover {
+        background-color: #0056b3;
+    }
+
+    form button:hover {
+        transform: scale(1.03); 
+    }
+</style>
+
+<div class="container">
+    <h1>Add Client:</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post</button>
+        <button type="reset">Reset All</button>
+        <button type="button" onclick="window.history.back()">Back</button>
+    </form> 
+</div>
+{% endblock content %}
+

@@ -1,0 +1,200 @@
+{% extends "home.html" %}
+{% block title %}Client Detail{% endblock title %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #555;
+    }
+
+    .client-detail {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .client-detail p {
+        font-size: 16px;
+        margin: 10px 0;
+        color: #555;
+    }
+
+    .client-detail strong {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    table thead {
+        background-color: #007bff;
+        color: white;
+    }
+
+    table th, table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    table tbody tr:hover {
+        background-color: #f4f4f4;
+    }
+
+    table td {
+        font-size: 14px;
+    }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .button-container a {
+        text-decoration: none;
+    }
+
+    .button-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-container button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .button-container button:active {
+        background-color: #003f7f;
+        transform: scale(0.98);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        table th, table td {
+            font-size: 14px;
+        }
+
+        .button-container {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="detail-header">
+        <h1>{{ client.first_name }} {{ client.last_name }}</h1>
+        <p>ID: {{ client.id }}</p>
+    </div>
+
+    <div class="client-detail">
+        <h2>Details</h2>
+        <p><strong>First Name:</strong> {{ client.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ client.last_name }}</p>
+        <p><strong>Age:</strong> {{ client.age }}</p>
+        <p><strong>Phone Number:</strong> {{ client.phone_number }}</p>
+        <p><strong>Email:</strong> {{ client.email }}</p>
+        <p><strong>Location:</strong> {{ client.location }}</p>
+        <p><strong>Balance:</strong> ${{ client.balance }}</p>
+    </div>
+
+    <h2>Transaction History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.transaction_date }}</td>
+                <td>{{ transaction.get_transaction_type_display }}</td>
+                <td>${{ transaction.amount }}</td>
+                <td>{{ transaction.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="button-container">
+        <a href="{% url 'Update-Client' client.id %}">
+            <button>Edit Client</button>
+        </a>
+        <a href="{% url 'Delete-Client' client.id %}">
+            <button>Delete Client</button>
+        </a>
+        <a href="{% url 'Create-Transaction' client.id %}">
+            <button>Create Transaction</button>
+        </a>
+
+        <a href="{% url 'Base-Page' %}">
+            <button>Home Page</button>
+        </a>
+    </div>
+</div>
+{% endblock content %}

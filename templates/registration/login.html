@@ -1,0 +1,89 @@
+{% extends "home.html" %}
+{% block title %}Log in{% endblock title %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group p {
+        margin: 0;
+        color: #555;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    .cancel-btn {
+        display: block;
+        text-align: center;
+        color: #008CBA;
+        text-decoration: none;
+        margin-top: 10px;
+    }
+
+    .cancel-btn:hover {
+        text-decoration: underline;
+    }
+</style>
+  <div class="login-container">
+    <h2>Log in to your account</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+    <h3>Dont have account yet?</h3>
+    <a href="{% url 'signup' %}"><button class="btn btn-primary">Sign Up</button></a>
+    <a href="{% url 'Base-Page' %}" class="cancel-btn">Cancel</a>
+  </div>
+
+{% endblock content %}
+
+
